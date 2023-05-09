@@ -7,7 +7,8 @@ class StateManagement extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Test', home: Test());
+    return MaterialApp(
+        debugShowCheckedModeBanner: false, title: 'Test', home: Test());
   }
 }
 
@@ -19,10 +20,13 @@ class Test extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test'),
+        title: const Center(
+          child: Text('Test'),
+        ),
         backgroundColor: Colors.red,
         toolbarHeight: 20,
       ),
+      body: Declarative(context),
     );
   }
 
@@ -31,17 +35,27 @@ class Test extends StatelessWidget {
       builder: (BuildContext context, void Function(void Function()) setState) {
         return Center(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
                 onPressed: () {
-                  counter++;
+                  setState(
+                    () {
+                      counter++;
+                    },
+                  );
                 },
                 icon: const Icon(Icons.add),
+                color: Colors.grey,
               ),
               Text('$counter'),
               IconButton(
                 onPressed: () {
-                  counter--;
+                  setState(
+                    () {
+                      counter--;
+                    },
+                  );
                 },
                 icon: const Icon(Icons.remove),
               )
